@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  ppoisdb:
+    image: "postgres:latest"
+    container_name: fastapi_app
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}  
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER:  ${DB_USER}
+    volumes:
+      - 'ppois-db-data:/var/opt/mssql'
+
+ 
+volumes:
+  ppois-db-data:
+    driver: local
