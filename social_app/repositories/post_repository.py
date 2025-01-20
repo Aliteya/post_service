@@ -12,16 +12,20 @@ class PostRepository():
         return self.session.query(Post).all()
 
     def get_post_by_id(self, id: int) -> Post:
-        return self.session.query()
+        return self.session.query(Post).filter(Post.id == id).first()
 
     def create_post(self, post_schema: PostSchema) -> Post:
-        return Post(title=post_schema.title, content=post_schema.content, published=post_schema.published , rating=post_schema.rating)
-
-    def update_all_posts(self):
-        pass
-
-    def update_post_by_id(self, id: int) -> Post:
-        pass
-
-    def delete_post_by_id(self, id: int) -> bool:
-        pass
+        new_post = Post(post_schema.model_dump())
+        self.session.add()
+        self.session.commit()
+        self.session.refresh()
+        return new_post
+    
+    def update_post_by_id(self, id: int, post_shema: PostSchema) -> Post:
+        self.session.query(Post).filter(Post.id == id).update(post_shema.model_dump(), synchronize_session=False)
+        self.session.commit()
+    
+    def delete_post_by_id(self, id: int):
+        post = self.session.query(Post).filter(Post.id == id)
+        post.delete(synchronize_session=False)
+        self.session.commit()
