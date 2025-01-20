@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .controllers import post_router
-from .models import Base
+from .models import Base, Post
 from .database import engine
 
 Base.metadata.create_all(bind=engine)

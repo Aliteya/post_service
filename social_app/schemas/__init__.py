@@ -1,3 +1,3 @@
-from .post_schema import Post
+from .post_schema import PostSchema
 
-__all__ = ["Post"]
+__all__ = ["PostShema"]

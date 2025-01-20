@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class Post(BaseModel):
+class PostSchema(BaseModel):
     title: str
     content: str
     published: bool = True

@@ -1,3 +1,4 @@
 from .base import Base
+from .post import Post
 
-__all__ = ["Base"]
+__all__ = ["Base", "Post"]

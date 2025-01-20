@@ -3,7 +3,7 @@ version: "3.9"
 services:
   ppoisdb:
     image: "postgres:latest"
-    container_name: fastapi_app
+    container_name: post_app
     ports:
       - "${DB_PORT}:5432"
     environment:
