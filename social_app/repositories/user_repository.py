@@ -11,8 +11,8 @@ class UserRepository():
     # def get_all_posts(self) -> list:
     #     return self.session.query(Post).all()
 
-    # def get_post_by_id(self, id: int) -> Post:
-    #     return self.session.query(Post).filter(Post.id == id).first()
+    def get_user_by_id(self, id: int) -> User:
+        return self.session.query(User).filter(User.id == id).first()
 
     def create_user(self, user_schema: UserCreate) -> User:
         new_user = User(**user_schema.model_dump())
