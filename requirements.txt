@@ -3,3 +3,4 @@ sqlalchemy
 psycopg2
 pydantic_settings
 passlib[bcrypt]
+python-jose[cryptography]

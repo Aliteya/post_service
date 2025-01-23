@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..schemas import PostCreate, PostResponse
 from ..repositories import PostRepository
+from ..auth import get_current_user
 from typing import List
 
 post_router = APIRouter(prefix="/posts", tags=["posts"])
@@ -22,7 +23,7 @@ def get_post(id: int, post_repo: PostRepository = Depends(get_post_repo)):
     return post
 
 @post_router.post("/createposts",status_code=status.HTTP_201_CREATED, response_model=PostResponse)
-def create_posts(new_post: PostCreate, post_repo: PostRepository = Depends(get_post_repo)):
+def create_posts(new_post: PostCreate, post_repo: PostRepository = Depends(get_post_repo), user_id: int = Depends(get_current_user)):
     new_post = post_repo.create_post(new_post)
     return new_post
 
