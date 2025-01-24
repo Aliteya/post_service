@@ -15,8 +15,8 @@ class PostRepository():
     def get_post_by_id(self, id: int) -> Post:
         return self.session.query(Post).filter(Post.id == id).first()
 
-    def create_post(self, post_schema: PostCreate) -> Post:
-        new_post = Post(**post_schema.model_dump())
+    def create_post(self, **kwargs) -> Post:
+        new_post = Post(**kwargs)
         self.session.add(new_post)
         self.session.commit()
         self.session.refresh(new_post)

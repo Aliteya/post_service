@@ -11,9 +11,9 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER:  ${DB_USER}
     volumes:
-      - 'ppois-db-data:/var/opt/mssql'
+      - 'db-data:/var/opt/mssql'
 
  
 volumes:
-  ppois-db-data:
+  db-data:
     driver: local

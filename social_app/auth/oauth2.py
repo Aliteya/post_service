@@ -3,7 +3,11 @@ from fastapi import Depends, status, HTTPException
 from datetime import datetime, timedelta
 from ..core import JWTSettings
 from ..schemas import  TokenData
+from ..database import get_db
+from ..models import User
 from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
+
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl='login')
 jwt_settings = JWTSettings()
@@ -30,9 +34,12 @@ def verify_access_token(token:str, credentials_exeption):
         raise credentials_exeption 
     return token_data
     
-def get_current_user(token: str = Depends(oauth2_schema)):
+def get_current_user(token: str = Depends(oauth2_schema), db: Session = Depends(get_db)):
     credentials_exeption = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unathorized user:(", headers={"WWW-Authentificate":"Bearer"})
-    return  verify_access_token(token, credentials_exeption)
+    token =  verify_access_token(token, credentials_exeption)
+
+    user = db.query(User).filter(User.id == token.id).first()
+    return user
     
     
 
