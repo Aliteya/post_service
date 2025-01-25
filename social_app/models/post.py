@@ -15,3 +15,5 @@ class Post(Base):
     created_at: Mapped[datetime] = mapped_column(nullable=False, server_default=text('NOW()'))
 
     owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+
+    owner = relationship("User")

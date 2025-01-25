@@ -3,14 +3,14 @@ from ..database import get_db
 from ..models import Post
 from fastapi import Depends
 from ..schemas import PostCreate
-from typing import List
+from typing import List, Optional
 
 class PostRepository():
     def __init__(self, db_session: Session = Depends(get_db)):
         self.session = db_session
 
-    def get_all_posts(self) -> List[PostCreate]:
-        return self.session.query(Post).all()
+    def get_posts(self, limit: int, search: Optional[str]) -> List[PostCreate]:
+        return self.session.query(Post).filter(Post.title.contains(search)).limit(limit).all()
 
     def get_post_by_id(self, id: int) -> Post:
         return self.session.query(Post).filter(Post.id == id).first()
