@@ -3,4 +3,4 @@ from typing_extensions import Annotated
 
 class VoteSchema(BaseModel):
     post_id: int
-    dir: Annotated[int, Field(le=1)]
+    dir: Annotated[int, Field(le=1, gt=0)]

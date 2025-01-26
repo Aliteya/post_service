@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import datetime
 from .user_shema import UserOut
@@ -17,5 +17,10 @@ class PostResponse(PostSchema):
     owner_id: int
     owner: UserOut
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
+
+class PostOut(BaseModel):
+    Post: PostResponse
+    votes: int
+
+    model_config = ConfigDict(from_attributes=True)

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status, HTTPException, Depends
 from sqlalchemy.orm import Session
 from ..database import get_db
-from ..schemas import PostCreate, PostResponse
+from ..schemas import PostCreate, PostResponse, PostOut
 from ..repositories import PostRepository
 from ..auth import get_current_user
 from typing import List, Optional
@@ -11,11 +11,11 @@ post_router = APIRouter(prefix="/posts", tags=["posts"])
 def get_post_repo(db: Session = Depends(get_db)) -> PostRepository:
     return PostRepository(db)
 
-@post_router.get("/", response_model=List[PostResponse])
-def get_posts(post_repo: PostRepository = Depends(get_post_repo), current_user: int = Depends(get_current_user), limit: int = 10, search: Optional[str] = ""):
-    return post_repo.get_posts(limit, search)
+@post_router.get("/", response_model=List[PostOut])
+def get_posts(post_repo: PostRepository = Depends(get_post_repo), current_user: int = Depends(get_current_user), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
+    return post_repo.get_posts(limit, skip, search)
 
-@post_router.get("/{id}", response_model=PostResponse)
+@post_router.get("/{id}", response_model=PostOut)
 def get_post(id: int, post_repo: PostRepository = Depends(get_post_repo), current_user: int = Depends(get_current_user)):
     post = post_repo.get_post_by_id(id)
     if not post:
