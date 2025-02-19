@@ -1,3 +1,3 @@
-from .config import Settings, JWTSettings
+from .config import settings, JWTSettings
 
-__all__ = ["Settings", "JWTSettings"]
+__all__ = ["settings", "JWTSettings"]

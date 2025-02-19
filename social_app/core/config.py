@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     def get_url(self):
         return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
+settings = Settings()
+
 class JWTSettings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str
