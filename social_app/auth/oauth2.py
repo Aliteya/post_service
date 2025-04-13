@@ -1,7 +1,7 @@
 from jose import JWTError, jwt
 from fastapi import Depends, status, HTTPException
 from datetime import datetime, timedelta
-from ..core import JWTSettings
+from ..core import jwt_settings
 from ..schemas import  TokenData
 from ..database import get_db
 from ..models import User
@@ -10,7 +10,6 @@ from sqlalchemy.orm import Session
 
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl='login')
-jwt_settings = JWTSettings()
 
 def create_access_token(data: dict):
     to_encode = data.copy()
