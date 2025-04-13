@@ -18,6 +18,7 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
+
 class JWTSettings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str

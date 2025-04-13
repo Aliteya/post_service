@@ -8,3 +8,4 @@
 /social_app/auth/__pycache__
 /social_app/utils/__pycache__
 /social_app/__pycache__
+/.pytest_cache
