@@ -1,11 +1,4 @@
 /venv
 .env
-/social_app/controllers/__pycache__
-/social_app/schemas/__pycache__
-/social_app/models/__pycache__
-/social_app/core/__pycache__
-/social_app/repositories/__pycache__
-/social_app/auth/__pycache__
-/social_app/utils/__pycache__
-/social_app/__pycache__
+__pycache__/
 /.pytest_cache
